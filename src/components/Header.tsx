@@ -90,26 +90,6 @@ const Header = () => {
           </nav>
         </div>
       </div>
-
-      {/* App Icons Slider - appears on scroll */}
-      <div className={`transition-all duration-500 ${
-        isScrolled 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-[-20px] pointer-events-none'
-      }`}>
-        <div className="bg-white/90 backdrop-blur-sm border-b border-gray-100 py-2">
-          <div className="animate-scroll-left flex space-x-4">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center"
-                   style={{
-                     background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
-                   }}>
-                <span className="text-white text-xs font-bold">A{i + 1}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </header>
   );
 };
