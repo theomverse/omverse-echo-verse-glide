@@ -12,7 +12,8 @@ const AppsSection = () => {
             const cards = entry.target.querySelectorAll('.app-card');
             cards.forEach((card, index) => {
               setTimeout(() => {
-                card.classList.add('animate-fade-up');
+                card.classList.add('opacity-100', 'translate-y-0');
+                card.classList.remove('opacity-0', 'translate-y-8');
               }, index * 100);
             });
           }
@@ -138,13 +139,6 @@ const AppsSection = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .animate-fade-up {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-        }
-      `}</style>
     </section>
   );
 };
