@@ -25,7 +25,10 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo Section */}
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-teal-600 to-cyan-800 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-green-700 to-green-900 rounded-lg flex items-center justify-center"
+                 style={{
+                   background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+                 }}>
               <span className="text-white font-bold text-sm lg:text-base">O</span>
             </div>
             <span className={`font-bold text-lg lg:text-xl transition-all duration-500 ${
@@ -45,7 +48,7 @@ const Header = () => {
                 href={item === 'Home' ? '#' : `#${item.toLowerCase().replace("'", '').replace(' ', '-')}`}
                 className={`font-medium transition-all duration-300 hover:scale-105 ${
                   isScrolled 
-                    ? 'text-gray-900 hover:text-teal-600' 
+                    ? 'text-gray-900 hover:text-green-700' 
                     : 'text-white/90 hover:text-white'
                 }`}
               >
@@ -76,7 +79,7 @@ const Header = () => {
                 href={item === 'Home' ? '#' : `#${item.toLowerCase().replace("'", '').replace(' ', '-')}`}
                 className={`block font-medium py-2 transition-colors ${
                   isScrolled 
-                    ? 'text-gray-900 hover:text-teal-600' 
+                    ? 'text-gray-900 hover:text-green-700' 
                     : 'text-white/90 hover:text-white'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -97,7 +100,10 @@ const Header = () => {
         <div className="bg-white/90 backdrop-blur-sm border-b border-gray-100 py-2">
           <div className="animate-scroll-left flex space-x-4">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-teal-500 to-cyan-700 rounded-lg flex items-center justify-center">
+              <div key={i} className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center"
+                   style={{
+                     background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+                   }}>
                 <span className="text-white text-xs font-bold">A{i + 1}</span>
               </div>
             ))}

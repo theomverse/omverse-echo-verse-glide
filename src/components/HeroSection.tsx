@@ -46,7 +46,10 @@ const HeroSection = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen bg-gradient-to-br from-teal-900 via-cyan-800 to-black overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-black overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 50%, #000000 100%)'
+      }}
     >
       {/* Parallax Background */}
       <div 
@@ -73,14 +76,14 @@ const HeroSection = () => {
                 <AnimatedText text="OMVERSE" delay={500} />
               </h1>
               
-              <p className="text-xl lg:text-2xl text-teal-100 max-w-md">
+              <p className="text-xl lg:text-2xl text-green-100 max-w-md">
                 <AnimatedText text="Where every app is a universe" delay={1000} />
               </p>
             </div>
 
             {/* App Cards Carousel */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-teal-200">Featured Apps</h3>
+              <h3 className="text-lg font-semibold text-green-200">Featured Apps</h3>
               <div className="flex space-x-4 overflow-x-auto pb-4">
                 {[
                   { name: 'AppOne', color: 'from-blue-500 to-blue-700' },
@@ -122,12 +125,12 @@ const HeroSection = () => {
                   className="aspect-square bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 p-4 hover:bg-white/20 transition-all duration-300 hover:scale-105"
                 >
                   <div className="h-full flex flex-col justify-between">
-                    <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
                       <span className="text-white font-bold">A</span>
                     </div>
                     <div>
                       <h4 className="text-white font-semibold">App {i + 1}</h4>
-                      <p className="text-teal-200 text-sm">Universe</p>
+                      <p className="text-green-200 text-sm">Universe</p>
                     </div>
                   </div>
                 </div>

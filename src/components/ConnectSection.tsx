@@ -6,7 +6,7 @@ const ConnectSection = () => {
     { 
       name: 'Instagram', 
       icon: Instagram, 
-      href: '#', 
+      href: 'https://www.instagram.com/theomverse_?igsh=dzQwamh3cmN4enZ6', 
       color: 'hover:text-pink-400',
       bgColor: 'hover:bg-pink-400/10'
     },
@@ -27,20 +27,24 @@ const ConnectSection = () => {
     { 
       name: 'Email', 
       icon: Mail, 
-      href: 'mailto:hello@omverse.com', 
-      color: 'hover:text-teal-400',
-      bgColor: 'hover:bg-teal-400/10'
+      href: 'mailto:omverse69@gmail.com', 
+      color: 'hover:text-green-400',
+      bgColor: 'hover:bg-green-400/10'
     }
   ];
 
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-teal-600 to-cyan-800" id="lets-talk">
+    <section className="py-20 lg:py-32 bg-gradient-to-br from-green-700 to-green-900" 
+             style={{
+               background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+             }}
+             id="lets-talk">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <div className="mb-16">
           <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
             Let's Talk
           </h2>
-          <p className="text-xl text-teal-100 max-w-2xl mx-auto">
+          <p className="text-xl text-green-100 max-w-2xl mx-auto">
             Ready to explore the universe of possibilities? Connect with us and let's create something amazing together.
           </p>
         </div>
@@ -75,17 +79,17 @@ const ConnectSection = () => {
 
         {/* CTA Button */}
         <div className="space-y-6">
-          <button className="bg-white text-teal-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-teal-50 transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <button className="bg-white text-green-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-50 transition-all duration-300 hover:scale-105 hover:shadow-xl">
             Start Your Journey
           </button>
           
-          <p className="text-teal-100">
+          <p className="text-green-100">
             Or drop us an email at{' '}
             <a 
-              href="mailto:hello@omverse.com" 
+              href="mailto:omverse69@gmail.com" 
               className="text-white font-semibold hover:underline transition-all duration-300"
             >
-              hello@omverse.com
+              omverse69@gmail.com
             </a>
           </p>
         </div>

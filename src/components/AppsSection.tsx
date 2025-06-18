@@ -1,59 +1,75 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const AppsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [visibleCards, setVisibleCards] = useState<number[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const cardIndex = parseInt(entry.target.getAttribute('data-index') || '0');
-            setVisibleCards(prev => [...prev, cardIndex]);
+            const cards = entry.target.querySelectorAll('.app-card');
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('animate-fade-up');
+              }, index * 100);
+            });
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    const cards = sectionRef.current?.querySelectorAll('[data-index]');
-    cards?.forEach(card => observer.observe(card));
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     return () => observer.disconnect();
   }, []);
 
   const apps = [
-    { 
-      name: 'Creative Studio', 
-      description: 'Design and create amazing visuals',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop'
+    {
+      id: 1,
+      name: 'Creative Studio',
+      description: 'Design tools for the future',
+      image: '/placeholder.svg',
+      category: 'Design'
     },
-    { 
-      name: 'Data Analytics', 
-      description: 'Powerful insights and analytics',
-      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop'
+    {
+      id: 2,
+      name: 'Data Analytics',
+      description: 'Insights that matter',
+      image: '/placeholder.svg',
+      category: 'Analytics'
     },
-    { 
-      name: 'Social Connect', 
-      description: 'Connect and collaborate globally',
-      image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop'
+    {
+      id: 3,
+      name: 'Social Connect',
+      description: 'Connect across universes',
+      image: '/placeholder.svg',
+      category: 'Social'
     },
-    { 
-      name: 'AI Assistant', 
-      description: 'Smart automation and AI tools',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop'
+    {
+      id: 4,
+      name: 'AI Assistant',
+      description: 'Your intelligent companion',
+      image: '/placeholder.svg',
+      category: 'AI'
     },
-    { 
-      name: 'Project Manager', 
-      description: 'Organize and manage projects',
-      image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600&h=400&fit=crop'
+    {
+      id: 5,
+      name: 'Project Manager',
+      description: 'Organize your universe',
+      image: '/placeholder.svg',
+      category: 'Productivity'
     },
-    { 
-      name: 'Finance Tracker', 
-      description: 'Track expenses and finances',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop'
+    {
+      id: 6,
+      name: 'Code Editor',
+      description: 'Build the future',
+      image: '/placeholder.svg',
+      category: 'Development'
     }
   ];
 
@@ -65,52 +81,56 @@ const AppsSection = () => {
             Featured Apps
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover our collection of powerful applications, each designed to enhance your digital experience
+            Discover our collection of powerful applications, each designed to unlock new possibilities in your digital journey.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {apps.map((app, index) => (
             <div
-              key={app.name}
-              data-index={index}
-              className={`group cursor-pointer transition-all duration-700 ${
-                visibleCards.includes(index)
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
-              }`}
+              key={app.id}
+              className="app-card group bg-black rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 opacity-0 translate-y-8"
               style={{
-                transitionDelay: visibleCards.includes(index) ? `${index * 100}ms` : '0ms'
+                transitionDelay: `${index * 100}ms`
               }}
             >
-              {/* Card Container */}
-              <div className="bg-black rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2">
-                {/* Image */}
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={app.image}
-                    alt={app.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
+              <div className="aspect-[4/3] bg-gradient-to-br from-green-700 to-green-900 relative overflow-hidden"
+                   style={{
+                     background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+                   }}>
+                <img 
+                  src={app.image} 
+                  alt={app.name}
+                  className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute top-4 right-4">
+                  <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-sm font-medium">
+                    {app.category}
+                  </span>
                 </div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors duration-300">
+                  {app.name}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {app.description}
+                </p>
                 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
-                    {app.name}
-                  </h3>
-                  <p className="text-gray-300 group-hover:text-gray-100 transition-colors">
-                    {app.description}
-                  </p>
-                  
-                  {/* Hover overlay */}
-                  <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="flex items-center text-teal-400 font-semibold">
-                      <span>Explore</span>
-                      <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <button className="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+                          style={{
+                            background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+                          }}>
+                    Explore
+                  </button>
+                  <div className="w-8 h-8 bg-green-700 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors duration-300"
+                       style={{
+                         background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+                       }}>
+                    <span className="text-white font-bold text-sm">→</span>
                   </div>
                 </div>
               </div>
@@ -118,6 +138,13 @@ const AppsSection = () => {
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .animate-fade-up {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+      `}</style>
     </section>
   );
 };
