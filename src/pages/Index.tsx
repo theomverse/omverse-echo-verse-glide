@@ -1,12 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect, useRef } from 'react';
+import Header from '../components/Header';
+import HeroSection from '../components/HeroSection';
+import AppsSection from '../components/AppsSection';
+import ConnectSection from '../components/ConnectSection';
+import Footer from '../components/Footer';
 
 const Index = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Smooth scrolling behavior
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.style.scrollBehavior = 'smooth';
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div ref={scrollContainerRef} className="relative overflow-x-hidden">
+      <Header />
+      <HeroSection />
+      <AppsSection />
+      <ConnectSection />
+      <Footer />
     </div>
   );
 };
