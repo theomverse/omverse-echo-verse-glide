@@ -96,7 +96,7 @@ const AppsSection = () => {
                 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
                     {app.name}
                   </h3>
                   <p className="text-gray-300 group-hover:text-gray-100 transition-colors">
@@ -105,7 +105,7 @@ const AppsSection = () => {
                   
                   {/* Hover overlay */}
                   <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="flex items-center text-green-400 font-semibold">
+                    <div className="flex items-center text-teal-400 font-semibold">
                       <span>Explore</span>
                       <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

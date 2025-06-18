@@ -7,7 +7,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-teal-600 to-cyan-800 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold">O</span>
               </div>
               <span className="font-bold text-xl">THE OMVERSE</span>
@@ -59,7 +59,7 @@ const Footer = () => {
               <p>Get in touch with us.</p>
               <a 
                 href="mailto:hello@omverse.com"
-                className="text-green-400 hover:text-green-300 transition-colors duration-300 font-semibold"
+                className="text-teal-400 hover:text-teal-300 transition-colors duration-300 font-semibold"
               >
                 hello@omverse.com
               </a>
