@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -6,6 +5,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showAppsPanel, setShowAppsPanel] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,11 +37,21 @@ const Header = () => {
           {/* Logo Section */}
           <div className="flex items-center space-x-3 group">
             <div className="transition-all duration-300 group-hover:scale-110">
-              <img 
-                src="/lovable-uploads/495f44ec-da14-4dbc-8da2-97361cfb971c.png" 
-                alt="OMVERSE Logo" 
-                className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
-              />
+              {!logoError ? (
+                <img 
+                  src="/lovable-uploads/495f44ec-da14-4dbc-8da2-97361cfb971c.png" 
+                  alt="OMVERSE Logo" 
+                  className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
+                  onError={() => setLogoError(true)}
+                />
+              ) : (
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-green-700 to-green-900 rounded-xl flex items-center justify-center"
+                     style={{
+                       background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
+                     }}>
+                  <span className="text-white font-bold text-lg lg:text-xl">O</span>
+                </div>
+              )}
             </div>
             <span className={`font-bold text-xl lg:text-2xl transition-all duration-500 ${
               isScrolled 
