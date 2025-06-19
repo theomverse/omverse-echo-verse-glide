@@ -39,7 +39,7 @@ const Header = () => {
             <div className="transition-all duration-300 group-hover:scale-110">
               {!logoError ? (
                 <img 
-                  src="/lovable-uploads/495f44ec-da14-4dbc-8da2-97361cfb971c.png" 
+                  src="/lovable-uploads/omverse-logo.png" 
                   alt="OMVERSE Logo" 
                   className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
                   onError={() => setLogoError(true)}
