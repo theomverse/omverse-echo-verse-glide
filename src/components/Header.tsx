@@ -36,11 +36,12 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo Section */}
           <div className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-green-700 to-green-900 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-                 style={{
-                   background: 'linear-gradient(135deg, #1a3d2e 0%, #0f2419 100%)'
-                 }}>
-              <span className="text-white font-bold text-lg lg:text-xl">O</span>
+            <div className="transition-all duration-300 group-hover:scale-110">
+              <img 
+                src="/lovable-uploads/495f44ec-da14-4dbc-8da2-97361cfb971c.png" 
+                alt="OMVERSE Logo" 
+                className="w-10 h-10 lg:w-12 lg:h-12 object-contain"
+              />
             </div>
             <span className={`font-bold text-xl lg:text-2xl transition-all duration-500 ${
               isScrolled 
