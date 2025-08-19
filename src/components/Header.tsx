@@ -56,9 +56,13 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {['Home', 'Apps', "Let's Talk", 'Contact'].map((item) => (
-              <a
+              <button
                 key={item}
-                href={item === 'Home' ? '#' : `#${item.toLowerCase().replace("'", '').replace(' ', '-')}`}
+                onClick={() => {
+                  const targetId = item === 'Home' ? 'top' : item.toLowerCase().replace("'", '').replace(' ', '-');
+                  const element = document.getElementById(targetId) || document.body;
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className={`font-medium transition-all duration-300 hover:scale-105 ${
                   isScrolled 
                     ? 'text-gray-900 hover:text-green-700' 
@@ -66,18 +70,21 @@ const Header = () => {
                 }`}
               >
                 {item}
-              </a>
+              </button>
             ))}
           </nav>
 
           {/* Let's Talk CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="#lets-talk"
+            <button
+              onClick={() => {
+                const element = document.getElementById('lets-talk');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-green-500 hover:to-green-600 glow-effect"
             >
               Let's Talk
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -97,26 +104,33 @@ const Header = () => {
         }`}>
           <nav className="pt-4 space-y-4">
             {['Home', 'Apps', "Let's Talk", 'Contact'].map((item) => (
-              <a
+              <button
                 key={item}
-                href={item === 'Home' ? '#' : `#${item.toLowerCase().replace("'", '').replace(' ', '-')}`}
-                className={`block font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
+                onClick={() => {
+                  const targetId = item === 'Home' ? 'top' : item.toLowerCase().replace("'", '').replace(' ', '-');
+                  const element = document.getElementById(targetId) || document.body;
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`block w-full text-left font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
                   isScrolled 
                     ? 'text-gray-900 hover:bg-gray-100' 
                     : 'text-white/90 hover:bg-white/10'
                 }`}
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item}
-              </a>
+              </button>
             ))}
-            <a
-              href="#lets-talk"
-              className="block bg-gradient-to-r from-green-600 to-green-700 text-white text-center py-3 px-4 rounded-full font-semibold transition-all duration-300 hover:from-green-500 hover:to-green-600 mx-4"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button
+              onClick={() => {
+                const element = document.getElementById('lets-talk');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+                setIsMobileMenuOpen(false);
+              }}
+              className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white text-center py-3 px-4 rounded-full font-semibold transition-all duration-300 hover:from-green-500 hover:to-green-600 mx-4"
             >
               Let's Talk
-            </a>
+            </button>
           </nav>
         </div>
       </div>

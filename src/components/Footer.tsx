@@ -138,12 +138,16 @@ If you have questions or concerns about our privacy practices, please contact us
               <ul className="space-y-2">
                 {['Home', 'Apps', 'About', 'Contact'].map((link) => (
                   <li key={link}>
-                    <a 
-                      href={`#${link.toLowerCase()}`}
+                    <button 
+                      onClick={() => {
+                        const targetId = link.toLowerCase();
+                        const element = document.getElementById(targetId) || document.body;
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }}
                       className="text-gray-400 hover:text-white transition-colors duration-300"
                     >
                       {link}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
