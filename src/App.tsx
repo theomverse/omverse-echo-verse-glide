@@ -9,7 +9,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 // Use basename only in production (GitHub Pages)
-const basename = import.meta.env.PROD ? "/the-omverse" : "/";
+const basename = import.meta.env.PROD ? "/omverse-echo-verse-glide" : "/";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
