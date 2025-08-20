@@ -1,33 +1,51 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const AppsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Optimized intersection observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const cards = entry.target.querySelectorAll('.app-card');
             cards.forEach((card, index) => {
+              // Shorter delay for mobile
+              const delay = isMobile ? index * 100 : index * 150;
               setTimeout(() => {
                 card.classList.add('opacity-100', 'translate-y-0');
                 card.classList.remove('opacity-0', 'translate-y-8');
-              }, index * 150);
+              }, delay);
             });
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: isMobile ? 0.05 : 0.1,
+        rootMargin: isMobile ? '50px' : '0px'
+      }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [isMobile]);
 
   const apps = [
     {
@@ -81,24 +99,28 @@ const AppsSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-white" id="apps">
+    <section ref={sectionRef} className="py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-white reduce-motion" id="apps">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight">
             Featured Apps
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
             Discover our collection of powerful applications, each designed to unlock new possibilities in your digital journey.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {apps.map((app, index) => (
             <div
               key={app.id}
-              className="app-card group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 opacity-0 translate-y-8 border border-gray-100"
+              className={`app-card group bg-white rounded-2xl overflow-hidden transition-all duration-300 opacity-0 translate-y-8 border border-gray-100 ${
+                isMobile 
+                  ? 'active:scale-95 active:shadow-lg' 
+                  : 'hover:shadow-2xl hover:scale-105 hover:-translate-y-2'
+              }`}
               style={{
-                transitionDelay: `${index * 150}ms`
+                transitionDelay: `${index * (isMobile ? 100 : 150)}ms`
               }}
             >
               <div className={`aspect-[4/3] bg-gradient-to-br ${app.gradient} relative overflow-hidden`}>
@@ -129,10 +151,18 @@ const AppsSection = () => {
                 </p>
                 
                 <div className="flex items-center justify-between">
-                  <button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <button className={`bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 touch-button mobile-touch-target ${
+                    isMobile 
+                      ? 'active:from-green-700 active:to-green-800' 
+                      : 'hover:from-green-500 hover:to-green-600 hover:scale-105 hover:shadow-lg'
+                  }`}>
                     Explore
                   </button>
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 rounded-lg flex items-center justify-center group-hover:from-green-500 group-hover:to-green-600 transition-all duration-300 group-hover:scale-110">
+                  <div className={`w-10 h-10 bg-gradient-to-r from-green-600 to-green-700 rounded-lg flex items-center justify-center transition-all duration-200 ${
+                    isMobile 
+                      ? 'active:from-green-700 active:to-green-800' 
+                      : 'group-hover:from-green-500 group-hover:to-green-600 group-hover:scale-110'
+                  }`}>
                     <span className="text-white font-bold">→</span>
                   </div>
                 </div>

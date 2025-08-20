@@ -1,23 +1,48 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showAppsPanel, setShowAppsPanel] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Throttled scroll handler for better mobile performance
+  const throttledScrollHandler = useCallback(() => {
+    let ticking = false;
+    
+    return () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY;
+          setIsScrolled(scrollPosition > 50);
+          // Only show apps panel on desktop
+          setShowAppsPanel(!isMobile && scrollPosition > 600);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+  }, [isMobile]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-      // Show apps panel after scrolling past hero section (approximately 600px)
-      setShowAppsPanel(scrollPosition > 600);
+    // Detect mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const scrollHandler = throttledScrollHandler();
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', scrollHandler);
+    };
+  }, [throttledScrollHandler]);
 
   const featuredApps = [
     { name: 'Creative Studio', icon: '🎨', color: 'from-purple-500 to-purple-700' },
@@ -87,22 +112,22 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Touch Optimized */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled ? 'text-gray-900 hover:bg-gray-100' : 'text-white hover:bg-white/10'}`}
+            className={`md:hidden mobile-touch-target touch-button rounded-lg transition-colors ${isScrolled ? 'text-gray-900 active:bg-gray-200' : 'text-white active:bg-white/20'}`}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Touch Optimized */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isMobileMenuOpen 
             ? 'max-h-80 opacity-100 pb-6' 
             : 'max-h-0 opacity-0'
         }`}>
-          <nav className="pt-4 space-y-4">
+          <nav className="pt-4 space-y-2">
             {['Home', 'Apps', "Let's Talk", 'Contact'].map((item) => (
               <button
                 key={item}
@@ -112,10 +137,10 @@ const Header = () => {
                   element.scrollIntoView({ behavior: 'smooth' });
                   setIsMobileMenuOpen(false);
                 }}
-                className={`block w-full text-left font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
+                className={`block w-full text-left font-medium mobile-touch-target touch-button rounded-lg transition-all duration-200 ${
                   isScrolled 
-                    ? 'text-gray-900 hover:bg-gray-100' 
-                    : 'text-white/90 hover:bg-white/10'
+                    ? 'text-gray-900 active:bg-gray-200' 
+                    : 'text-white/90 active:bg-white/20'
                 }`}
               >
                 {item}
@@ -127,7 +152,7 @@ const Header = () => {
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
                 setIsMobileMenuOpen(false);
               }}
-              className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white text-center py-3 px-4 rounded-full font-semibold transition-all duration-300 hover:from-green-500 hover:to-green-600 mx-4"
+              className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white text-center mobile-touch-target touch-button rounded-full font-semibold transition-all duration-200 active:from-green-700 active:to-green-800 mx-4"
             >
               Let's Talk
             </button>
