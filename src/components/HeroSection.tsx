@@ -109,9 +109,9 @@ const HeroSection = () => {
       )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 lg:pt-40">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[calc(100vh-150px)] sm:min-h-[calc(100vh-200px)]">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center justify-center min-h-[calc(100vh-150px)] sm:min-h-[calc(100vh-200px)]">
           {/* Main Content */}
-          <div className="space-y-6 sm:space-y-8 text-center">
+          <div className="w-full space-y-6 sm:space-y-8 text-center flex flex-col items-center justify-center">
             <div className="space-y-3 sm:space-y-4">
               <h1 
                 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white"
@@ -132,7 +132,15 @@ const HeroSection = () => {
             {/* App Cards Carousel - Mobile Optimized */}
             <div className="space-y-3 sm:space-y-4">
               <h3 className="text-base sm:text-lg font-semibold text-green-200">Featured Apps</h3>
-              <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4 mobile-scroll-optimized scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div 
+                className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4 mobile-scroll-optimized scrollbar-hide snap-x snap-mandatory px-2" 
+                style={{ 
+                  scrollbarWidth: 'none', 
+                  msOverflowStyle: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                  scrollPaddingLeft: '16px'
+                }}
+              >
                 {[
                   { name: 'AppOne', color: 'from-blue-500 to-blue-700' },
                   { name: 'AppTwo', color: 'from-purple-500 to-purple-700' },
@@ -146,7 +154,7 @@ const HeroSection = () => {
                       animationDelay: `${index * 200}ms`
                     }}
                   >
-                    <div className={`w-40 sm:w-48 h-28 sm:h-32 bg-gradient-to-br ${app.color} rounded-xl p-3 sm:p-4 backdrop-blur-lg bg-opacity-20 border border-white/20 transition-all duration-300 ${
+                    <div className={`w-36 sm:w-48 h-24 sm:h-32 bg-gradient-to-br ${app.color} rounded-xl p-3 sm:p-4 backdrop-blur-lg bg-opacity-20 border border-white/20 transition-all duration-300 ${
                       isMobile ? 'active:scale-95' : 'hover:scale-105 hover:-translate-y-2 hover:shadow-2xl'
                     }`}>
                       <div className="h-full flex flex-col justify-between">

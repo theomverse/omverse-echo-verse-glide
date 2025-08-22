@@ -123,7 +123,7 @@ const Header = () => {
             
             {/* Simple Dropdown Menu */}
             {isMobileMenuOpen && (
-              <div className="absolute right-0 top-12 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+              <div className="absolute right-0 top-12 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[9999] overflow-hidden">
                 {['Home', 'Apps', "Let's Talk", 'Contact'].map((item) => (
                   <button
                     key={item}
@@ -133,7 +133,7 @@ const Header = () => {
                       element.scrollIntoView({ behavior: 'smooth' });
                       setIsMobileMenuOpen(false);
                     }}
-                    className="block w-full text-left px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors"
+                    className="block w-full text-left px-4 py-3 text-gray-900 hover:bg-gray-50 active:bg-gray-100 transition-colors mobile-touch-target"
                   >
                     {item}
                   </button>
