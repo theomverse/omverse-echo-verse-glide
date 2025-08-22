@@ -132,7 +132,7 @@ const HeroSection = () => {
             {/* App Cards Carousel - Mobile Optimized */}
             <div className="space-y-3 sm:space-y-4">
               <h3 className="text-base sm:text-lg font-semibold text-green-200">Featured Apps</h3>
-              <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4 mobile-scroll-optimized scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-white/10">
                 {[
                   { name: 'AppOne', color: 'from-blue-500 to-blue-700' },
                   { name: 'AppTwo', color: 'from-purple-500 to-purple-700' },
