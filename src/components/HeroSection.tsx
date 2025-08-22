@@ -111,7 +111,7 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 lg:pt-40">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[calc(100vh-150px)] sm:min-h-[calc(100vh-200px)]">
           {/* Main Content */}
-          <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
+          <div className="space-y-6 sm:space-y-8 text-center">
             <div className="space-y-3 sm:space-y-4">
               <h1 
                 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white"
@@ -124,7 +124,7 @@ const HeroSection = () => {
                 <AnimatedText text="OMVERSE" delay={500} />
               </h1>
               
-              <p className="text-lg xs:text-xl sm:text-2xl text-green-100 max-w-md mx-auto lg:mx-0">
+              <p className="text-lg xs:text-xl sm:text-2xl text-green-100 max-w-md mx-auto">
                 <AnimatedText text="Where every app is a universe" delay={1000} />
               </p>
             </div>
@@ -132,7 +132,7 @@ const HeroSection = () => {
             {/* App Cards Carousel - Mobile Optimized */}
             <div className="space-y-3 sm:space-y-4">
               <h3 className="text-base sm:text-lg font-semibold text-green-200">Featured Apps</h3>
-              <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4 mobile-scroll-optimized">
+              <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4 mobile-scroll-optimized scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 {[
                   { name: 'AppOne', color: 'from-blue-500 to-blue-700' },
                   { name: 'AppTwo', color: 'from-purple-500 to-purple-700' },
@@ -141,7 +141,7 @@ const HeroSection = () => {
                 ].map((app, index) => (
                   <div
                     key={app.name}
-                    className="flex-shrink-0 group touch-button mobile-touch-target"
+                    className="flex-shrink-0 group touch-button mobile-touch-target snap-start"
                     style={{
                       animationDelay: `${index * 200}ms`
                     }}

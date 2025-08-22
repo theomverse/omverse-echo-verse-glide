@@ -112,52 +112,37 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button - Touch Optimized */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden mobile-touch-target touch-button rounded-lg transition-colors ${isScrolled ? 'text-gray-900 active:bg-gray-200' : 'text-white active:bg-white/20'}`}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Button - Simple Dropdown */}
+          <div className="md:hidden relative">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`mobile-touch-target touch-button rounded-lg transition-colors ${isScrolled ? 'text-gray-900 active:bg-gray-200' : 'text-white active:bg-white/20'}`}
+            >
+              <Menu size={24} />
+            </button>
+            
+            {/* Simple Dropdown Menu */}
+            {isMobileMenuOpen && (
+              <div className="absolute right-0 top-12 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                {['Home', 'Apps', "Let's Talk", 'Contact'].map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => {
+                      const targetId = item === 'Home' ? 'top' : item.toLowerCase().replace("'", '').replace(' ', '-');
+                      const element = document.getElementById(targetId) || document.body;
+                      element.scrollIntoView({ behavior: 'smooth' });
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors"
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Mobile Menu - Touch Optimized */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen 
-            ? 'max-h-80 opacity-100 pb-6' 
-            : 'max-h-0 opacity-0'
-        }`}>
-          <nav className="pt-4 space-y-2">
-            {['Home', 'Apps', "Let's Talk", 'Contact'].map((item) => (
-              <button
-                key={item}
-                onClick={() => {
-                  const targetId = item === 'Home' ? 'top' : item.toLowerCase().replace("'", '').replace(' ', '-');
-                  const element = document.getElementById(targetId) || document.body;
-                  element.scrollIntoView({ behavior: 'smooth' });
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`block w-full text-left font-medium mobile-touch-target touch-button rounded-lg transition-all duration-200 ${
-                  isScrolled 
-                    ? 'text-gray-900 active:bg-gray-200' 
-                    : 'text-white/90 active:bg-white/20'
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-            <button
-              onClick={() => {
-                const element = document.getElementById('lets-talk');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-                setIsMobileMenuOpen(false);
-              }}
-              className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white text-center mobile-touch-target touch-button rounded-full font-semibold transition-all duration-200 active:from-green-700 active:to-green-800 mx-4"
-            >
-              Let's Talk
-            </button>
-          </nav>
-        </div>
       </div>
 
       {/* Animated Apps Panel - NewGenGen Style */}
